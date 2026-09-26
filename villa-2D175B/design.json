@@ -5,9 +5,10 @@
     "villa_type": "TH-M",
     "source": "plans/2D175B-floor-plans.jpg",
     "units": "mm",
-    "notes": ["Room sizes are the dimensions written on the plan (interior, mm).", "Room positions, door and window locations are measured from the drawing and are approximate (about +/-150 mm).", "Walls are drawn 150 mm thick.", "Balcony is labeled 3835 x 1885 overall; the drawn main area is 2600 wide because the rest is a strip under Bedroom 2's corner.", "Finishes, window sizes, ceilings, stairs and bathroom fittings follow the owner's walk-through videos of the unit (which is built as a mirror image of this plan)."]
+    "notes": ["Room sizes are the dimensions written on the plan (interior, mm).", "Room positions, door and window locations are measured from the drawing and are approximate (about +/-150 mm).", "Walls are drawn 150 mm thick.", "Balcony is labeled 3835 x 1885 overall; the drawn main area is 2600 wide because the rest is a strip under Bedroom 2's corner.", "Finishes, window sizes, ceilings, stairs and bathroom fittings follow the owner's walk-through videos of the unit. The unit is built as a mirror image of this plan, so \"mirror\": true flips every output east-west; coordinates in this file stay in the plan's orientation."]
   },
   "wall": 150,
+  "mirror": true,
   "floors": [
     {
       "id": "GF",

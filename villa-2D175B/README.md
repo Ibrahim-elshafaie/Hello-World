@@ -33,3 +33,7 @@ npm install
 npm run bundle
 python3 build.py
 ```
+
+## Orientation
+
+The built unit is a mirror image of the drawing. `"mirror": true` in `design.json` makes `build.py` flip everything east-west (plan, schedule and 3D tour). Coordinates in `design.json` stay in the drawing's orientation, so measurements can still be read straight off the plan.

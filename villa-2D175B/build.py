@@ -11,6 +11,63 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 design = json.loads((HERE / "design.json").read_text())
+
+
+# Mirror east-west (x -> A - x) when the built unit is the mirror image of the drawing.
+MIRROR_A = 7625
+FLIP = {"left": "right", "right": "left"}
+
+
+def mirror_design(d):
+    d = json.loads(json.dumps(d))
+    A = MIRROR_A
+
+    def rect(o):
+        o["x"] = A - o["x"] - o["w"]
+
+    def side(o, k):
+        if o.get(k) in FLIP:
+            o[k] = FLIP[o[k]]
+
+    for fl in d["floors"]:
+        for r in fl["rooms"]:
+            rect(r)
+            if r.get("lx", 0) >= 0 and "lx" in r:
+                r["lx"] = A - r["lx"]
+            if "rail" in r:
+                r["rail"] = [FLIP.get(s, s) for s in r["rail"]]
+        for o in fl["openings"] + fl["fixed"] + fl["stairs"]:
+            rect(o)
+        for st in fl["stairs"]:
+            st["open"] = FLIP.get(st.get("open", "right"))
+        for l in fl["labels"]:
+            l["x"] = A - l["x"]
+        for w in fl["windows"]:
+            w["x1"], w["x2"] = A - w["x1"], A - w["x2"]
+        for dr in fl["doors"]:
+            dr["at"] = [A - dr["at"][0], dr["at"][1]]
+            if dr["wall"] == "h":
+                dr["dir"] = -dr["dir"]
+            else:
+                dr["swing"] = -dr["swing"]
+        for it in fl["furniture"]:
+            rect(it)
+            for k in ("back", "shelf_end"):
+                side(it, k)
+            if "arms" in it:
+                it["arms"] = [FLIP.get(s, s) for s in it["arms"]]
+            if "open_end" in it:
+                side(it["open_end"], "side")
+            for e in it.get("extra", []):
+                rect(e)
+                side(e, "arm")
+                side(e, "back")
+    d["mirrorA"] = A
+    return d
+
+
+if design.get("mirror"):
+    design = mirror_design(design)
 WALL = design["wall"]
 HALF = WALL / 2
 

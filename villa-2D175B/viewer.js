@@ -8,6 +8,10 @@ const D = window.DESIGN;
 const MM = 0.001;
 const DOOR_H = 2.4, OPEN_H = 2.4, WIN_SILL = 900, WIN_TOP = 2400, EYE = 1.6, RADIUS = 0.22, LEVEL = 3.3;
 const W = D.wall;
+// the whole model can be mirrored east-west (x -> MA - x) to match the built unit
+const MA = D.mirrorA ?? null;
+const mx = x => MA === null ? x : MA - x;
+const mxs = (a, b) => MA === null ? [a, b] : [MA - b, MA - a];
 const touch = matchMedia('(pointer: coarse)').matches;
 let H = 3.0; // ceiling height of the floor being built
 
@@ -727,28 +731,31 @@ function buildUStair(g, ceil, fl, s, col) {
     box(g, x0, x1, a, b, top - 0.04, top, tread);
     box(g, x0 + 100, x1 - 100, a + 35, b - 35, top, top + 0.01, M.runner, { shadow: false });
   };
-  for (let i = 0; i < 8; i++) step(xm, s.x + s.w, y0 + i * go, y0 + (i + 1) * go, (i + 1) * rise, true); // lower flight, rising toward the front
+  const L = s.open === 'left'; // which side faces the hall
+  const [la, lb] = L ? [s.x, xm] : [xm, s.x + s.w], [ua, ub] = L ? [xm, s.x + s.w] : [s.x, xm];
+  for (let i = 0; i < 8; i++) step(la, lb, y0 + i * go, y0 + (i + 1) * go, (i + 1) * rise, true); // lower flight, rising toward the front
   step(s.x, s.x + s.w, yL, yEnd, 9 * rise, false); // half landing by the tall window
-  for (let j = 0; j < 8; j++) step(s.x, xm, yL - (j + 1) * go, yL - j * go, (10 + j) * rise, false); // upper flight, back over the hall
+  for (let j = 0; j < 8; j++) step(ua, ub, yL - (j + 1) * go, yL - j * go, (10 + j) * rise, false); // upper flight, back over the hall
   const dy = (y0 - yL) * MM, dz = 8 * rise, len = Math.hypot(dy, dz); // sloped soffit under the upper flight
-  const soffit = new THREE.Mesh(new THREE.BoxGeometry((xm - s.x) * MM, 0.03, len), M.paint);
-  soffit.position.set((s.x + xm) / 2 * MM, (10 * rise + 18 * rise) / 2 - 0.26, (y0 + yL) / 2 * MM);
+  const soffit = new THREE.Mesh(new THREE.BoxGeometry((ub - ua) * MM, 0.03, len), M.paint);
+  soffit.position.set((ua + ub) / 2 * MM, (10 * rise + 18 * rise) / 2 - 0.26, (y0 + yL) / 2 * MM);
   soffit.rotation.x = Math.atan2(dz, -dy); soffit.receiveShadow = true;
   g.add(soffit);
   col.push([s.x * MM, y0 * MM, (s.x + s.w) * MM, yEnd * MM]);
-  const bx = s.x + s.w - 45;
+  const bx = L ? s.x + 45 : s.x + s.w - 45;
   balustrade(g, bx, y0, rise + 0.9, yL, 8 * rise + 0.9, y => Math.min(8, Math.floor((y - y0) / go) + 1) * rise);
   balustrade(g, bx, yL, 9 * rise + 0.9, yEnd, 9 * rise + 0.9, () => 9 * rise);
   balustrade(g, xm, yL, 10 * rise + 0.9, y0, 17 * rise + 0.9, y => (10 + Math.min(7, Math.floor((yL - y) / go))) * rise);
   // stairwell open to the first floor: walls, a tall window and the upper ceiling
   const top = H + LEVEL;
   for (const [x0, x1, a, b] of [[s.x, s.x + 20, y0, yEnd], [s.x + s.w - 20, s.x + s.w, y0, yEnd], [s.x, s.x + s.w, y0, y0 + 20]]) box(ceil, x0, x1, a, b, H, top, M.wall, { shadow: false });
-  box(ceil, s.x, 900, yEnd - 20, yEnd, H, top, M.wall, { shadow: false });
-  box(ceil, 1700, s.x + s.w, yEnd - 20, yEnd, H, top, M.wall, { shadow: false });
-  box(ceil, 900, 1700, yEnd - 20, yEnd, H, LEVEL + 0.2, M.wall, { shadow: false });
-  box(ceil, 900, 1700, yEnd - 20, yEnd, LEVEL + 2.9, top, M.wall, { shadow: false });
-  box(ceil, 900, 1700, yEnd - 10, yEnd - 4, LEVEL + 0.2, LEVEL + 2.9, M.glass, { shadow: false });
-  for (const [x0, x1] of [[900, 950], [1650, 1700]]) box(ceil, x0, x1, yEnd - 40, yEnd, LEVEL + 0.2, LEVEL + 2.9, M.frame, { shadow: false });
+  const wa = L ? s.x : s.x + 900, wb = L ? s.x + s.w - 900 : s.x + s.w; // tall stairwell window
+  box(ceil, s.x, wa, yEnd - 20, yEnd, H, top, M.wall, { shadow: false });
+  box(ceil, wb, s.x + s.w, yEnd - 20, yEnd, H, top, M.wall, { shadow: false });
+  box(ceil, wa, wb, yEnd - 20, yEnd, H, LEVEL + 0.2, M.wall, { shadow: false });
+  box(ceil, wa, wb, yEnd - 20, yEnd, LEVEL + 2.9, top, M.wall, { shadow: false });
+  box(ceil, wa, wb, yEnd - 10, yEnd - 4, LEVEL + 0.2, LEVEL + 2.9, M.glass, { shadow: false });
+  for (const [x0, x1] of [[wa, wa + 50], [wb - 50, wb]]) box(ceil, x0, x1, yEnd - 40, yEnd, LEVEL + 0.2, LEVEL + 2.9, M.frame, { shadow: false });
   const c = new THREE.Mesh(new THREE.PlaneGeometry(s.w * MM, (yEnd - y0) * MM), M.ceiling);
   c.rotation.x = Math.PI / 2; c.position.set((s.x + s.w / 2) * MM, top, (y0 + yEnd) / 2 * MM); ceil.add(c);
   return [s.x, s.x + s.w, y0, yEnd];
@@ -765,7 +772,7 @@ function buildStairs(g, fl, s, col) {
   }
   col.push([s.x * MM, s.y * MM, (s.x + s.w) * MM, (s.y + s.h) * MM]);
   // white balustrade on the open side: square spindles, flat rail and newel posts
-  const bx = s.x + s.w - 45;
+  const bx = s.open === 'left' ? s.x + 45 : s.x + s.w - 45;
   const yLow = up ? s.y + s.h : s.y, yHigh = up ? s.y : s.y + s.h;
   const zLow = 0.9 + (up ? rise : 0), zHigh = 0.9 + (up ? s.treads * rise : -s.treads * rise + rise);
   const railZ = y => zLow + (zHigh - zLow) * (y - yLow) / (yHigh - yLow);
@@ -781,10 +788,10 @@ function buildStairs(g, fl, s, col) {
 // garden, terrace and boundary walls around the ground floor
 function garden(g, z) {
   floorPlane(g, -40000, 40000, -40000, 40000, floorMat('pavers'), z - 0.06);
-  floorPlane(g, -150, 9200, -4200, -150, M.turf, z - 0.03);
-  floorPlane(g, 7125, 9200, -150, 9100, M.turf, z - 0.03);
-  floorPlane(g, -150, 7125, -1300, -150, floorMat('outdoor_tile'), z - 0.02);
-  const walls = [[-150, 9350, -4350, -4200], [9200, 9350, -4350, 9100], [-300, -150, -4350, -150]];
+  floorPlane(g, ...mxs(-150, 9200), -4200, -150, M.turf, z - 0.03);
+  floorPlane(g, ...mxs(7125, 9200), -150, 9100, M.turf, z - 0.03);
+  floorPlane(g, ...mxs(-150, 7125), -1300, -150, floorMat('outdoor_tile'), z - 0.02);
+  const walls = [[-150, 9350, -4350, -4200], [9200, 9350, -4350, 9100], [-300, -150, -4350, -150]].map(([a, b, c, d]) => [...mxs(a, b), c, d]);
   for (const [x0, x1, y0, y1] of walls) {
     box(g, x0, x1, y0, y1, z, z + 1.55, M.render);
     for (let k = 0; k < 4; k++) box(g, x0 + (x1 - x0 > 200 ? 0 : 20), x1 - (x1 - x0 > 200 ? 0 : 20), y0 + (y1 - y0 > 200 ? 0 : 20), y1 - (y1 - y0 > 200 ? 0 : 20), z + 1.6 + k * 0.11, z + 1.67 + k * 0.11, M.paint);
@@ -913,8 +920,8 @@ sel.onchange = () => {
 };
 $('mWalk').onclick = () => setMode('walk');
 $('mDoll').onclick = () => setMode('doll');
-$('fGF').onclick = () => { if (mode === 'walk') goTo(0, 2300, 7600, 2300, 3000); else { setFloor(0); setMode('doll'); } };
-$('fFF').onclick = () => { if (mode === 'walk') goTo(1, 2300, 6300, 5000, 6300); else { setFloor(1); setMode('doll'); } };
+$('fGF').onclick = () => { if (mode === 'walk') goTo(0, mx(2300), 7600, mx(2300), 3000); else { setFloor(0); setMode('doll'); } };
+$('fFF').onclick = () => { if (mode === 'walk') goTo(1, mx(2300), 6300, mx(5000), 6300); else { setFloor(1); setMode('doll'); } };
 const furn = $('tFurn');
 if (furn) furn.onclick = () => {
   const on = furn.getAttribute('aria-pressed') !== 'true';
@@ -985,7 +992,7 @@ addEventListener('resize', () => {
 });
 
 // start at the front door, looking into the house
-goTo(0, 3300, 10300, 3300, 3000);
+goTo(0, mx(3300), 10300, mx(3300), 3000);
 sel.dataset.ready = '1';
 const clock = new THREE.Clock();
 renderer.setAnimationLoop(() => {
