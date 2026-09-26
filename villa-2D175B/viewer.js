@@ -40,7 +40,7 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#e9e4dc');
+scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#e9e4dc');
 const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.05, 200);
 camera.rotation.order = 'YXZ';
 scene.add(new THREE.HemisphereLight('#ffffff', '#b9ae9c', 1.6));
