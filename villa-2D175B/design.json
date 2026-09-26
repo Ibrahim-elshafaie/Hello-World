@@ -13,7 +13,7 @@
       "id": "GF",
       "name": "Ground floor",
       "rooms": [
-        {"name": "Living / Dining", "x": 0, "y": 0, "w": 6975, "h": 4850, "labeled": "6975 x 4850", "lx": 3700, "ly": 4250, "floor": "marble", "ceiling": "tray"},
+        {"name": "Living / Dining", "x": 0, "y": 0, "w": 6975, "h": 4850, "labeled": "6975 x 4850", "lx": 1700, "ly": 4250, "floor": "marble", "ceiling": "tray"},
         {"name": "Passage", "x": 2825, "y": 5000, "w": 1150, "h": 1850, "nowalls": true, "lx": -1, "ly": -1, "floor": "marble"},
         {"name": "PR", "x": 0, "y": 5000, "w": 2675, "h": 1700, "labeled": "2675 x 1700", "lx": 1500, "ly": 6300, "floor": "beige_tile"},
         {"name": "Foyer", "x": 0, "y": 6850, "w": 3975, "h": 4100, "labeled": "3975 x 4100", "lx": 2300, "ly": 8100, "floor": "marble"},
@@ -62,9 +62,9 @@
       ],
       "furniture": [
         {"id": "GF-01", "name": "TV console", "room": "Living / Dining", "cat": "storage", "back": "top", "x": 3950, "y": 0, "w": 2400, "h": 450, "height": 0.5, "spec": "Low console on legs in front of the glazing, TV on a swivel stand, light oak"},
-        {"id": "GF-02", "name": "Corner sofa", "room": "Living / Dining", "cat": "seating", "back": "bottom", "x": 3875, "y": 2930, "w": 3000, "h": 870, "arms": [], "open_end": {"side": "left", "len": 870}, "extra": [{"x": 6005, "y": 1300, "w": 870, "h": 1630, "arm": "top", "back": "right"}], "size": "3000 x 2500", "height": 0.92, "spec": "Oak Houses Rafahiya 5-seater chenille right corner sofa, grey, 300 x 250 cm, depth 87 cm, height 92 cm, seat height 40 cm", "link": "https://www.homecentre.com/ae/en/buy-oak-houses-rafahiya-5-seater-chenille-right-corner-sofa-167613683-HC18112024/p/167613683"},
-        {"id": "GF-03", "name": "Rug", "room": "Living / Dining", "cat": "soft", "x": 3950, "y": 1300, "w": 2800, "h": 2000, "spec": "Wool blend, oatmeal, 2000 x 2800"},
-        {"id": "GF-04", "name": "Coffee table", "room": "Living / Dining", "cat": "table", "x": 4600, "y": 1900, "w": 1100, "h": 600, "spec": "Rounded rectangle, oak or travertine top"},
+        {"id": "GF-02", "name": "Corner sofa", "room": "Living / Dining", "cat": "seating", "back": "bottom", "x": 3875, "y": 3730, "w": 3000, "h": 870, "arms": [], "open_end": {"side": "left", "len": 870}, "extra": [{"x": 6005, "y": 2100, "w": 870, "h": 1630, "arm": "top", "back": "right"}], "size": "3000 x 2500", "height": 0.92, "spec": "Oak Houses Rafahiya 5-seater chenille right corner sofa, grey, 300 x 250 cm, depth 87 cm, height 92 cm, seat height 40 cm", "link": "https://www.homecentre.com/ae/en/buy-oak-houses-rafahiya-5-seater-chenille-right-corner-sofa-167613683-HC18112024/p/167613683"},
+        {"id": "GF-03", "name": "Rug", "room": "Living / Dining", "cat": "soft", "x": 3950, "y": 2100, "w": 2800, "h": 2000, "spec": "Wool blend, oatmeal, 2000 x 2800"},
+        {"id": "GF-04", "name": "Coffee table", "room": "Living / Dining", "cat": "table", "x": 4600, "y": 2700, "w": 1100, "h": 600, "spec": "Rounded rectangle, oak or travertine top"},
         {"id": "GF-05", "name": "Armchair", "room": "Living / Dining", "cat": "seating", "back": "left", "x": 3700, "y": 800, "w": 800, "h": 800, "spec": "Olive boucle, swivel base"},
         {"id": "GF-06", "name": "Floor lamp", "room": "Living / Dining", "cat": "decor", "shape": "circle", "x": 6450, "y": 800, "w": 400, "h": 400, "spec": "Black metal, linen shade"},
         {"id": "GF-07", "name": "Dining table", "room": "Living / Dining", "cat": "table", "x": 900, "y": 1950, "w": 1800, "h": 900, "spec": "Seats 6, solid oak, 1800 x 900"},
