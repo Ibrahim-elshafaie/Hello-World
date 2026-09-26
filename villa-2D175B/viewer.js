@@ -138,7 +138,7 @@ const M = {
   mosaic: new THREE.MeshStandardMaterial({ map: tileTex({ span: 0.24, cols: 8, rows: 8, size: 256, gw: 2, grout: '#8d8d8a', pattern: (i, j) => ['#6b6f73', '#a3a6a8', '#3f4245', '#c9c6bf'][(i * 7 + j * 3) % 4] }), roughness: 0.2 }),
   tileWall: new THREE.MeshStandardMaterial({ map: tileTex({ span: 1.2, cols: 2, rows: 1, base: '#6d6e70', vary: 0.05, grout: '#58595a' }), roughness: 0.3 }),
 };
-const KEYWORDS = [['beige', '#d8cab2'], ['olive', '#6f7447'], ['sand', '#cdbc9f'], ['greige', '#b8ad9e'], ['cream', '#ece3d0'],
+const KEYWORDS = [['grey', '#c8c5bf'], ['beige', '#d8cab2'], ['olive', '#6f7447'], ['sand', '#cdbc9f'], ['greige', '#b8ad9e'], ['cream', '#ece3d0'],
   ['oatmeal', '#ddd2bd'], ['off-white', '#eeeae3'], ['oak', '#c29a6b'], ['travertine', '#d8ccb4'],
   ['aluminium', '#9da3a6'], ['black', '#2a2a2a']];
 const CAT_DEFAULT = { seating: '#b9ab96', table: '#b08a5e', storage: '#c9a77c', bed: '#b8ad9e', soft: '#e6dccb', decor: '#6f8a55', appliance: '#c9cdd0' };
@@ -339,8 +339,9 @@ function buildItem(g, fl, it, col) {
     const depth = along(back) ? R.h : R.w, length = along(back) ? R.w : R.h;
     const backD = Math.min(230, depth * 0.26), armW = outdoor ? 60 : 150;
     // seat cushions between the arms, back cushions against the back
+    const arms = it.arms || SIDES_PERP[back];
     const inner = { ...R };
-    for (const s of SIDES_PERP[back]) {
+    for (const s of arms) {
       if (s === 'left') { inner.x += armW; inner.w -= armW; } if (s === 'right') inner.w -= armW;
       if (s === 'top') { inner.y += armW; inner.h -= armW; } if (s === 'bottom') inner.h -= armW;
     }
@@ -351,13 +352,24 @@ function buildItem(g, fl, it, col) {
     for (const c of split(seatR, back, nC, 12)) rbox(g, c.x, c.x + c.w, c.y, c.y + c.h, 0.3, 0.45, cloth, 60);
     const backR = { ...inner }; const bs = strip(inner, back, backD);
     Object.assign(backR, { x: bs[0], y: bs[2], w: bs[1] - bs[0], h: bs[3] - bs[2] });
-    for (const c of split(backR, back, nC, 12)) rbox(g, c.x, c.x + c.w, c.y, c.y + c.h, 0.3, top, cloth, 70);
-    for (const s of SIDES_PERP[back]) rbox(g, ...strip(R, s, armW), 0.08, arm, outdoor ? mat('#9da3a6', { metalness: 0.5, roughness: 0.4 }) : cloth, 55);
+    const oe = it.open_end; // backless chaise end
+    if (oe) { if (oe.side === 'left') { backR.x += oe.len; backR.w -= oe.len; } if (oe.side === 'right') backR.w -= oe.len;
+      if (oe.side === 'top') { backR.y += oe.len; backR.h -= oe.len; } if (oe.side === 'bottom') backR.h -= oe.len; }
+    const nB = Math.max(1, Math.round((along(back) ? backR.w : backR.h) / 850));
+    for (const c of split(backR, back, oe ? nB : nC, 12)) rbox(g, c.x, c.x + c.w, c.y, c.y + c.h, 0.3, top, cloth, 70);
+    for (const s of arms) rbox(g, ...strip(R, s, armW), 0.08, arm, outdoor ? mat('#9da3a6', { metalness: 0.5, roughness: 0.4 }) : cloth, 55);
     for (const e of it.extra || []) { // chaise or corner module of a sectional
       box(g, e.x + 50, e.x + e.w - 50, e.y + 50, e.y + e.h - 50, 0, 0.08, M.black);
       rbox(g, e.x, e.x + e.w, e.y, e.y + e.h, 0.08, 0.3, cloth, 30, { collide: col });
-      rbox(g, e.x + (e.arm === 'left' ? armW : 0), e.x + e.w - (e.arm === 'right' ? armW : 0),
-        e.y + (e.arm === 'top' ? armW : 0), e.y + e.h - (e.arm === 'bottom' ? armW : 0), 0.3, 0.45, cloth, 60);
+      const off = s => (e.arm === s ? armW : 0) + (e.back === s ? backD : 0);
+      rbox(g, e.x + off('left'), e.x + e.w - off('right'), e.y + off('top'), e.y + e.h - off('bottom'), 0.3, 0.45, cloth, 60);
+      if (e.back) {
+        const eb = strip(e, e.back, backD), er = { x: eb[0], y: eb[2], w: eb[1] - eb[0], h: eb[3] - eb[2] };
+        if (e.arm === 'top') { er.y += armW; er.h -= armW; } if (e.arm === 'bottom') er.h -= armW;
+        if (e.arm === 'left') { er.x += armW; er.w -= armW; } if (e.arm === 'right') er.w -= armW;
+        const n = Math.max(1, Math.round((along(e.back) ? er.w : er.h) / 850));
+        for (const c of split(er, e.back, n, 12)) rbox(g, c.x, c.x + c.w, c.y, c.y + c.h, 0.3, top, cloth, 70);
+      }
       if (e.arm) rbox(g, ...strip(e, e.arm, armW), 0.08, arm, cloth, 55);
     }
     return;
