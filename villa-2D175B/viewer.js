@@ -182,6 +182,7 @@ function buildItem(g, fl, it, col) {
     else if (n.includes('shoe')) z1 = 1.8;
     else if (n.includes('nightstand')) z1 = 0.55;
     else if (n.includes('tv unit')) { z0 = 0.3; z1 = 0.7; }
+    if (it.height) z1 = it.height;
     box(g, R.x, R.x + R.w, R.y, R.y + R.h, z0, z1, color, { collide: col });
     if (n.includes('wardrobe') || n.includes('sideboard') || n.includes('shoe')) { // door seams on the front face
       const front = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[back];
@@ -196,8 +197,9 @@ function buildItem(g, fl, it, col) {
     }
     if (n.includes('tv')) { // TV on the wall behind
       const s = strip(R, back, 40), len = back === 'top' || back === 'bottom' ? R.w : R.h, tv = Math.min(1400, len - 100);
-      if (back === 'left' || back === 'right') box(g, s[0], s[1], cy - tv / 2, cy + tv / 2, 1.05, 1.05 + tv * 0.5625 * MM, C.black);
-      else box(g, cx - tv / 2, cx + tv / 2, s[2], s[3], 1.05, 1.05 + tv * 0.5625 * MM, C.black);
+      const tz = z1 < 0.7 ? z1 + 0.15 : 1.05;
+      if (back === 'left' || back === 'right') box(g, s[0], s[1], cy - tv / 2, cy + tv / 2, tz, tz + tv * 0.5625 * MM, C.black);
+      else box(g, cx - tv / 2, cx + tv / 2, s[2], s[3], tz, tz + tv * 0.5625 * MM, C.black);
     }
     if (n.includes('mirror')) {
       const s = strip(R, back, 20);
