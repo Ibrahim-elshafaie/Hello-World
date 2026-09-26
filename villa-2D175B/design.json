@@ -5,12 +5,7 @@
     "villa_type": "TH-M",
     "source": "plans/2D175B-floor-plans.jpg",
     "units": "mm",
-    "notes": [
-      "Room sizes are the dimensions written on the plan (interior, mm).",
-      "Room positions, door and window locations are measured from the drawing and are approximate (about +/-150 mm).",
-      "Walls are drawn 150 mm thick.",
-      "Balcony is labeled 3835 x 1885 overall; the drawn main area is 2600 wide because the rest is a strip under Bedroom 2's corner."
-    ]
+    "notes": ["Room sizes are the dimensions written on the plan (interior, mm).", "Room positions, door and window locations are measured from the drawing and are approximate (about +/-150 mm).", "Walls are drawn 150 mm thick.", "Balcony is labeled 3835 x 1885 overall; the drawn main area is 2600 wide because the rest is a strip under Bedroom 2's corner.", "Finishes, window sizes, ceilings, stairs and bathroom fittings follow the owner's walk-through videos of the unit (which is built as a mirror image of this plan)."]
   },
   "wall": 150,
   "floors": [
@@ -18,13 +13,14 @@
       "id": "GF",
       "name": "Ground floor",
       "rooms": [
-        {"name": "Living / Dining", "x": 0, "y": 0, "w": 6975, "h": 4850, "labeled": "6975 x 4850", "lx": 3700, "ly": 4250},
-        {"name": "PR", "x": 0, "y": 5000, "w": 2675, "h": 1700, "labeled": "2675 x 1700", "lx": 1500, "ly": 6300},
-        {"name": "Foyer", "x": 0, "y": 6850, "w": 3975, "h": 4100, "labeled": "3975 x 4100", "lx": 2300, "ly": 8100},
-        {"name": "Kitchen", "x": 4125, "y": 5000, "w": 3500, "h": 3900, "labeled": "3500 x 3900", "lx": 5875, "ly": 6900},
-        {"name": "Maid", "x": 4125, "y": 9050, "w": 2100, "h": 2150, "labeled": "2100 x 2150", "lx": 5650, "ly": 10100},
-        {"name": "Maid bath", "x": 6375, "y": 9050, "w": 1400, "h": 2150, "labeled": "1400 x 2150", "lx": 7075, "ly": 10150},
-        {"name": "Parking (2 cars)", "x": 4600, "y": 11900, "w": 6380, "h": 6000, "labeled": "6380 x 6000", "open": true, "lx": 7790, "ly": 17500}
+        {"name": "Living / Dining", "x": 0, "y": 0, "w": 6975, "h": 4850, "labeled": "6975 x 4850", "lx": 3700, "ly": 4250, "floor": "marble", "ceiling": "tray"},
+        {"name": "Passage", "x": 2825, "y": 5000, "w": 1150, "h": 1850, "nowalls": true, "lx": -1, "ly": -1, "floor": "marble"},
+        {"name": "PR", "x": 0, "y": 5000, "w": 2675, "h": 1700, "labeled": "2675 x 1700", "lx": 1500, "ly": 6300, "floor": "beige_tile"},
+        {"name": "Foyer", "x": 0, "y": 6850, "w": 3975, "h": 4100, "labeled": "3975 x 4100", "lx": 2300, "ly": 8100, "floor": "marble"},
+        {"name": "Kitchen", "x": 4125, "y": 5000, "w": 3500, "h": 3900, "labeled": "3500 x 3900", "lx": 5875, "ly": 6900, "floor": "charcoal_tile"},
+        {"name": "Maid", "x": 4125, "y": 9050, "w": 2100, "h": 2150, "labeled": "2100 x 2150", "lx": 5650, "ly": 10100, "floor": "grey_tile"},
+        {"name": "Maid bath", "x": 6375, "y": 9050, "w": 1400, "h": 2150, "labeled": "1400 x 2150", "lx": 7075, "ly": 10150, "floor": "grey_tile"},
+        {"name": "Parking (2 cars)", "x": 4600, "y": 11900, "w": 6380, "h": 6000, "labeled": "6380 x 6000", "open": true, "lx": 7790, "ly": 17500, "floor": "pavers"}
       ],
       "labels": [
         {"text": "Passage", "x": 3400, "y": 5950}
@@ -36,20 +32,23 @@
       "doors": [
         {"at": [2750, 6550], "len": 800, "wall": "v", "dir": -1, "swing": -1},
         {"at": [4050, 8700], "len": 800, "wall": "v", "dir": -1, "swing": 1},
-        {"at": [2800, 11025], "len": 1000, "wall": "h", "dir": 1, "swing": -1},
+        {"at": [2800, 11025], "len": 1000, "wall": "h", "dir": 1, "swing": -1, "front": true, "transom": true},
         {"at": [5300, 8975], "len": 800, "wall": "h", "dir": 1, "swing": 1},
         {"at": [6300, 11050], "len": 700, "wall": "v", "dir": -1, "swing": 1}
       ],
       "windows": [
-        {"x1": 0, "y1": -75, "x2": 6975, "y2": -75, "sill": 0, "top": 2600},
-        {"x1": 7050, "y1": 0, "x2": 7050, "y2": 4850, "sill": 0, "top": 2600},
-        {"x1": 900, "y1": 11025, "x2": 2100, "y2": 11025},
-        {"x1": 7700, "y1": 6500, "x2": 7700, "y2": 7300}
+        {"x1": 0, "y1": -75, "x2": 6975, "y2": -75, "sill": 0, "top": 2750},
+        {"x1": 7050, "y1": 0, "x2": 7050, "y2": 4850, "sill": 0, "top": 2750},
+        {"x1": 900, "y1": 11025, "x2": 2100, "y2": 11025, "sill": 0, "top": 2750},
+        {"x1": 7700, "y1": 5600, "x2": 7700, "y2": 7300, "sill": 1050, "top": 1600},
+        {"x1": 4450, "y1": 11275, "x2": 4900, "y2": 11275, "sill": 1000, "top": 2300},
+        {"x1": 5350, "y1": 11275, "x2": 5800, "y2": 11275, "sill": 1000, "top": 2300}
       ],
       "stairs": [
-        {"x": 0, "y": 8900, "w": 1700, "h": 2050, "treads": 8, "label": "UP"}
+        {"x": 0, "y": 8900, "w": 1700, "h": 2050, "treads": 8, "label": "UP", "u": {"y0": 8050, "landing": 800}}
       ],
       "fixed": [
+        {"name": "Tile wall", "x": 0, "y": 5000, "w": 12, "h": 1700},
         {"name": "WC", "x": 0, "y": 5650, "w": 650, "h": 400},
         {"name": "Basin", "x": 1150, "y": 5000, "w": 550, "h": 450},
         {"name": "Shaft", "x": 2275, "y": 5000, "w": 400, "h": 400},
@@ -83,24 +82,25 @@
         {"id": "GF-13", "name": "Fridge", "room": "Kitchen", "cat": "appliance", "x": 6925, "y": 8000, "w": 700, "h": 700, "spec": "Freestanding, 700 wide, counter-depth"},
         {"id": "GF-14", "name": "Single bed", "room": "Maid", "cat": "bed", "back": "bottom", "x": 4125, "y": 9250, "w": 900, "h": 1900, "spec": "900 x 1900 with under-bed drawers"},
         {"id": "GF-15", "name": "Wardrobe", "room": "Maid", "cat": "storage", "x": 5325, "y": 10650, "w": 900, "h": 550, "spec": "2-door, 900 wide, 550 deep"}
-      ]
+      ],
+      "height": 3.0
     },
     {
       "id": "FF",
       "name": "First floor",
       "rooms": [
-        {"name": "Bedroom 1", "x": 0, "y": 0, "w": 3925, "h": 3700, "labeled": "3925 x 3700", "lx": 2300, "ly": 1300},
-        {"name": "Master bedroom", "x": 4075, "y": 0, "w": 3850, "h": 3450, "labeled": "3850 x 3450", "lx": 6300, "ly": 2950},
-        {"name": "Entry", "x": 4075, "y": 3600, "w": 1100, "h": 1900, "labeled": "", "lx": 4625, "ly": 4300},
-        {"name": "Master closet", "x": 5325, "y": 3600, "w": 2600, "h": 1800, "labeled": "2600 x 1850", "lx": 6300, "ly": 4800},
-        {"name": "Master bath", "x": 5325, "y": 5550, "w": 2600, "h": 2600, "labeled": "2600 x 2600", "lx": 6400, "ly": 6900},
-        {"name": "Bath 2", "x": 5325, "y": 8300, "w": 2600, "h": 1650, "labeled": "2600 x 1650", "lx": 6300, "ly": 8900},
-        {"name": "Balcony", "x": 5325, "y": 10100, "w": 2600, "h": 1885, "labeled": "3835 x 1885", "lx": 6625, "ly": 11700},
-        {"name": "Bath 1", "x": 0, "y": 3850, "w": 2685, "h": 1650, "labeled": "2685 x 1650", "lx": 1500, "ly": 5050},
-        {"name": "", "x": 2835, "y": 3850, "w": 1090, "h": 1650, "labeled": ""},
-        {"name": "Lobby", "x": 1075, "y": 5650, "w": 4100, "h": 1250, "labeled": "", "lx": 2500, "ly": 6150},
-        {"name": "Stair", "x": 0, "y": 5650, "w": 925, "h": 5350, "labeled": "", "lx": -1, "ly": -1},
-        {"name": "Bedroom 2", "x": 1075, "y": 7050, "w": 4100, "h": 3950, "labeled": "4100 x 3950", "lx": 3300, "ly": 9700}
+        {"name": "Bedroom 1", "x": 0, "y": 0, "w": 3925, "h": 3700, "labeled": "3925 x 3700", "lx": 2300, "ly": 1300, "floor": "carpet_blue", "ceiling": "cornice"},
+        {"name": "Master bedroom", "x": 4075, "y": 0, "w": 3850, "h": 3450, "labeled": "3850 x 3450", "lx": 6300, "ly": 2950, "floor": "carpet_greige"},
+        {"name": "Entry", "x": 4075, "y": 3600, "w": 1100, "h": 1900, "labeled": "", "lx": 4625, "ly": 4300, "floor": "carpet_greige"},
+        {"name": "Master closet", "x": 5325, "y": 3600, "w": 2600, "h": 1800, "labeled": "2600 x 1850", "lx": 6300, "ly": 4800, "floor": "marble"},
+        {"name": "Master bath", "x": 5325, "y": 5550, "w": 2600, "h": 2600, "labeled": "2600 x 2600", "lx": 6400, "ly": 6900, "floor": "stripe_tile"},
+        {"name": "Bath 2", "x": 5325, "y": 8300, "w": 2600, "h": 1650, "labeled": "2600 x 1650", "lx": 6300, "ly": 8900, "floor": "beige_tile"},
+        {"name": "Balcony", "x": 5325, "y": 10100, "w": 2600, "h": 1885, "labeled": "3835 x 1885", "lx": 6625, "ly": 11700, "floor": "outdoor_tile", "rail": ["bottom"], "noceiling": true},
+        {"name": "Bath 1", "x": 0, "y": 3850, "w": 2685, "h": 1650, "labeled": "2685 x 1650", "lx": 1500, "ly": 5050, "floor": "beige_tile"},
+        {"name": "", "x": 2835, "y": 3850, "w": 1090, "h": 1650, "labeled": "", "floor": "marble"},
+        {"name": "Lobby", "x": 1075, "y": 5650, "w": 4100, "h": 1250, "labeled": "", "lx": 2500, "ly": 6150, "floor": "marble"},
+        {"name": "Stair", "x": 0, "y": 5650, "w": 925, "h": 5350, "labeled": "", "lx": -1, "ly": -1, "floor": "marble"},
+        {"name": "Bedroom 2", "x": 1075, "y": 7050, "w": 4100, "h": 3950, "labeled": "4100 x 3950", "lx": 3300, "ly": 9700, "floor": "carpet_grey", "ceiling": "cornice"}
       ],
       "labels": [],
       "openings": [
@@ -119,15 +119,16 @@
         {"at": [5250, 10950], "len": 800, "wall": "v", "dir": -1, "swing": -1}
       ],
       "windows": [
-        {"x1": 800, "y1": -75, "x2": 3100, "y2": -75},
-        {"x1": 4800, "y1": -75, "x2": 7200, "y2": -75},
-        {"x1": 1200, "y1": 11075, "x2": 2200, "y2": 11075}
+        {"x1": 800, "y1": -75, "x2": 3100, "y2": -75, "sill": 0, "top": 2750},
+        {"x1": 4800, "y1": -75, "x2": 7200, "y2": -75, "sill": 0, "top": 2750},
+        {"x1": 1200, "y1": 11075, "x2": 2200, "y2": 11075, "sill": 0, "top": 2750},
+        {"x1": 100, "y1": 11075, "x2": 825, "y2": 11075, "sill": 0, "top": 2750}
       ],
       "stairs": [
         {"x": 0, "y": 6900, "w": 925, "h": 4100, "treads": 14, "label": "DN"}
       ],
       "fixed": [
-        {"name": "Tub", "x": 0, "y": 3850, "w": 700, "h": 1650},
+        {"name": "Shower", "x": 0, "y": 3850, "w": 700, "h": 1650},
         {"name": "WC", "x": 900, "y": 3850, "w": 400, "h": 650},
         {"name": "Basin", "x": 1400, "y": 3850, "w": 550, "h": 450},
         {"name": "Shaft", "x": 2285, "y": 3850, "w": 400, "h": 400},
@@ -137,7 +138,7 @@
         {"name": "Shower", "x": 7025, "y": 7300, "w": 900, "h": 850},
         {"name": "Basin", "x": 5325, "y": 9400, "w": 500, "h": 550},
         {"name": "WC", "x": 6100, "y": 9300, "w": 400, "h": 650},
-        {"name": "Tub", "x": 7225, "y": 8300, "w": 700, "h": 1650}
+        {"name": "Shower", "x": 7225, "y": 8300, "w": 700, "h": 1650}
       ],
       "furniture": [
         {"id": "FF-01", "name": "Queen bed", "room": "Bedroom 1", "cat": "bed", "back": "bottom", "x": 800, "y": 1700, "w": 1600, "h": 2000, "spec": "1600 x 2000, upholstered headboard, greige"},
@@ -166,7 +167,8 @@
         {"id": "FF-19", "name": "Outdoor chair", "room": "Balcony", "cat": "seating", "back": "bottom", "x": 7000, "y": 10700, "w": 600, "h": 600, "spec": "Powder-coated aluminium, outdoor cushion"},
         {"id": "FF-20", "name": "Side table", "room": "Balcony", "cat": "table", "shape": "circle", "x": 6400, "y": 10750, "w": 500, "h": 500, "spec": "Outdoor, 500 diameter"},
         {"id": "FF-21", "name": "Planter", "room": "Balcony", "cat": "decor", "shape": "circle", "x": 7450, "y": 10200, "w": 400, "h": 400, "spec": "Tall planter"}
-      ]
+      ],
+      "height": 3.0
     }
   ]
 }

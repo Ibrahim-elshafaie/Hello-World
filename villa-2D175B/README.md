@@ -22,8 +22,9 @@ python3 build.py
 - Walk: drag to look around, move with W A S D or the arrow keys (Shift to go faster). On a phone, use the on-screen arrows.
 - Dollhouse: drag to orbit, scroll or pinch to zoom.
 - "Go to room" drops you in the doorway of any room. The Ground and First buttons switch floors.
+- "Furniture" hides or shows all furniture and curtains, so you can see the empty unit.
 
-Furniture is modelled as simple shapes at real sizes and heights. For photoreal renders, open the same layout in Blender or SketchUp, or use an image-generation tool with the plan and `brief.md`.
+The shell follows the owner's walk-through videos: polished cream porcelain downstairs, charcoal tiles in the kitchen, carpet in the bedrooms, a tray ceiling in the living room, black-framed full-height glazing, a U-shaped stair with a white balustrade, and frosted glass showers. Each room's floor finish is the `floor` field in `design.json`. Furniture is modelled at real sizes and heights with rounded upholstery. For photoreal renders, open the same layout in Blender or SketchUp, or use an image-generation tool with the plan and `brief.md`.
 
 If you change `viewer.js`, rebuild the bundle first (needs Node.js):
 

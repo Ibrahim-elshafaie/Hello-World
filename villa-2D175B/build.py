@@ -107,7 +107,7 @@ def floor_svg(fl):
         cls = "floor open" if r.get("open") else "floor"
         parts.append(f'<rect x="{r["x"]}" y="{r["y"]}" width="{r["w"]}" height="{r["h"]}" class="{cls}"/>')
     for r in rooms:
-        if r.get("open"):
+        if r.get("open") or r.get("nowalls"):
             continue
         parts.append(
             f'<rect x="{r["x"] - HALF}" y="{r["y"] - HALF}" width="{r["w"] + WALL}" '
