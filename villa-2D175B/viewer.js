@@ -156,12 +156,13 @@ function buildItem(g, fl, it, col) {
     const seat = outdoor ? '#e8e1d4' : color;
     box(g, R.x, R.x + R.w, R.y, R.y + R.h, 0.1, 0.43, seat, { collide: col });
     const depth = Math.min(it.w, it.h);
-    box(g, ...strip(R, back, Math.min(220, depth * 0.25)), 0.43, 0.85, seat);
-    for (const s of SIDES_PERP[back]) box(g, ...strip(R, s, outdoor ? 60 : 150), 0.43, 0.62, outdoor ? '#9da3a6' : seat);
+    const top = it.height || 0.85, arm = Math.min(0.62, top - 0.04);
+    box(g, ...strip(R, back, Math.min(220, depth * 0.25)), 0.43, top, seat);
+    for (const s of SIDES_PERP[back]) box(g, ...strip(R, s, outdoor ? 60 : 150), 0.43, arm, outdoor ? '#9da3a6' : seat);
     for (const e of it.extra || []) { // chaise or corner module of a sectional
       legs(g, inset(e, 40), 0.1, 40, C.black);
       box(g, e.x, e.x + e.w, e.y, e.y + e.h, 0.1, 0.43, seat, { collide: col });
-      if (e.arm) box(g, ...strip(e, e.arm, 150), 0.43, 0.62, seat);
+      if (e.arm) box(g, ...strip(e, e.arm, 150), 0.43, arm, seat);
     }
     return;
   }
