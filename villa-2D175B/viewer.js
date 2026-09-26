@@ -20,7 +20,7 @@ const C = {
   outdoor: '#bdb4a6', parking: '#a39d94', black: '#2a2a2a', white: '#f7f7f5', steel: '#c9cdd0',
   stone: '#e4dfd5', cabinet: '#ece7de', door: '#d9c3a0', linen: '#f1ece2', grass: '#b8c39c',
 };
-const KEYWORDS = [['olive', '#7a7f4f'], ['sand', '#cdbc9f'], ['greige', '#b8ad9e'], ['cream', '#ece3d0'],
+const KEYWORDS = [['beige', '#d8cab2'], ['olive', '#7a7f4f'], ['sand', '#cdbc9f'], ['greige', '#b8ad9e'], ['cream', '#ece3d0'],
   ['oatmeal', '#ddd2bd'], ['off-white', '#eeeae3'], ['oak', '#c29a6b'], ['travertine', '#d8ccb4'],
   ['aluminium', '#9da3a6'], ['black', '#2a2a2a']];
 const CAT_DEFAULT = { seating: '#b9ab96', table: '#b08a5e', storage: '#c9a77c', bed: '#b8ad9e', soft: '#e6dccb', decor: '#6f8a55', appliance: '#c9cdd0' };
@@ -158,6 +158,11 @@ function buildItem(g, fl, it, col) {
     const depth = Math.min(it.w, it.h);
     box(g, ...strip(R, back, Math.min(220, depth * 0.25)), 0.43, 0.85, seat);
     for (const s of SIDES_PERP[back]) box(g, ...strip(R, s, outdoor ? 60 : 150), 0.43, 0.62, outdoor ? '#9da3a6' : seat);
+    for (const e of it.extra || []) { // chaise or corner module of a sectional
+      legs(g, inset(e, 40), 0.1, 40, C.black);
+      box(g, e.x, e.x + e.w, e.y, e.y + e.h, 0.1, 0.43, seat, { collide: col });
+      if (e.arm) box(g, ...strip(e, e.arm, 150), 0.43, 0.62, seat);
+    }
     return;
   }
   if (it.cat === 'table') {

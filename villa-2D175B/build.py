@@ -130,6 +130,8 @@ def floor_svg(fl):
         for it in fl["furniture"]:
             if (it["cat"] == "soft") != (layer == "soft"):
                 continue
+            for ex in it.get("extra", []):
+                parts.append(shape(ex, CAT_COLORS[it["cat"]], "furn"))
             parts.append(shape(it, CAT_COLORS[it["cat"]], "furn"))
             parts.append(item_label(it))
     for d in fl["doors"]:
@@ -167,17 +169,18 @@ def schedule_rows():
                     "floor": fl["name"],
                     "room": it["room"],
                     "item": it["name"],
-                    "size_mm": f'{max(it["w"], it["h"])} x {min(it["w"], it["h"])}',
+                    "size_mm": it.get("size") or f'{max(it["w"], it["h"])} x {min(it["w"], it["h"])}',
                     "qty": 1,
                     "spec": it["spec"],
                     "category": CAT_NAMES[it["cat"]],
+                    "link": it.get("link", ""),
                 }
     return list(rows.values())
 
 
 rows = schedule_rows()
 with open(HERE / "furniture.csv", "w", newline="") as fh:
-    wr = csv.DictWriter(fh, fieldnames=["id", "floor", "room", "item", "size_mm", "qty", "spec", "category"])
+    wr = csv.DictWriter(fh, fieldnames=["id", "floor", "room", "item", "size_mm", "qty", "spec", "category", "link"])
     wr.writeheader()
     wr.writerows(rows)
 
