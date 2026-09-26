@@ -1,0 +1,11 @@
+{
+  "name": "villa-2d175b-tour",
+  "private": true,
+  "scripts": {
+    "bundle": "esbuild viewer.js --bundle --minify --format=iife --target=es2019 --outfile=tour_bundle.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.23.1",
+    "three": "0.160.0"
+  }
+}

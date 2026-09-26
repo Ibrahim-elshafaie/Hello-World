@@ -7,8 +7,9 @@ Furnished layout for plot 2D175B (Rockwood cluster, villa type TH-M), made from 
 - `build.py`: generates the outputs from `design.json`
 - `layout.html`: both floors drawn to scale, with the furniture schedule
 - `furniture.csv`: the schedule, which opens in Excel or Google Sheets
-- `tour.html`: 3D walk-through of both floors, built from the same data (open it in a browser with internet access; it loads three.js from jsDelivr)
-- `tour_template.html`: the 3D viewer code that `build.py` fills in
+- `tour.html`: 3D walk-through of both floors, built from the same data. It is one self-contained file that works offline.
+- `viewer.js`: the 3D viewer code; `tour_bundle.js` is it bundled with three.js
+- `tour_template.html`: the page that `build.py` fills with the data and the bundle
 
 To change the design, edit `design.json` (or ask Claude to) and run this to regenerate the plans, schedule and 3D tour:
 
@@ -23,3 +24,11 @@ python3 build.py
 - "Go to room" drops you in the doorway of any room. The Ground and First buttons switch floors.
 
 Furniture is modelled as simple shapes at real sizes and heights. For photoreal renders, open the same layout in Blender or SketchUp, or use an image-generation tool with the plan and `brief.md`.
+
+If you change `viewer.js`, rebuild the bundle first (needs Node.js):
+
+```bash
+npm install
+npm run bundle
+python3 build.py
+```

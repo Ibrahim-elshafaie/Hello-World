@@ -278,6 +278,8 @@ page = f"""<!doctype html>
 print(f"Wrote layout.html and furniture.csv ({len(rows)} schedule rows)")
 
 tour = (HERE / "tour_template.html").read_text()
-tour = tour.replace("/*DESIGN*/null", json.dumps(design)).replace("__PLOT__", esc(p["plot"]))
+bundle = (HERE / "tour_bundle.js").read_text().replace("</script", "<\\/script")
+tour = tour.replace("/*DESIGN*/null", json.dumps(design).replace("</", "<\\/")).replace("__PLOT__", esc(p["plot"]))
+tour = tour.replace("/*BUNDLE*/", bundle)
 (HERE / "tour.html").write_text(tour)
 print("Wrote tour.html")
