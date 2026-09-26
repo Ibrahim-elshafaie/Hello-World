@@ -17,7 +17,7 @@
         {"name": "Passage", "x": 2825, "y": 5000, "w": 1150, "h": 1850, "nowalls": true, "lx": -1, "ly": -1, "floor": "marble"},
         {"name": "PR", "x": 0, "y": 5000, "w": 2675, "h": 1700, "labeled": "2675 x 1700", "lx": 1500, "ly": 6300, "floor": "beige_tile"},
         {"name": "Foyer", "x": 0, "y": 6850, "w": 3975, "h": 4100, "labeled": "3975 x 4100", "lx": 2300, "ly": 8100, "floor": "marble"},
-        {"name": "Kitchen", "x": 4125, "y": 5000, "w": 3500, "h": 3900, "labeled": "3500 x 3900", "lx": 5875, "ly": 6900, "floor": "charcoal_tile"},
+        {"name": "Kitchen", "x": 4125, "y": 5000, "w": 3500, "h": 3900, "labeled": "3500 x 3900", "lx": 5875, "ly": 8350, "floor": "charcoal_tile"},
         {"name": "Maid", "x": 4125, "y": 9050, "w": 2100, "h": 2150, "labeled": "2100 x 2150", "lx": 5650, "ly": 10100, "floor": "grey_tile"},
         {"name": "Maid bath", "x": 6375, "y": 9050, "w": 1400, "h": 2150, "labeled": "1400 x 2150", "lx": 7075, "ly": 10150, "floor": "grey_tile"},
         {"name": "Parking (2 cars)", "x": 4600, "y": 11900, "w": 6380, "h": 6000, "labeled": "6380 x 6000", "open": true, "lx": 7790, "ly": 17500, "floor": "pavers"}
@@ -81,7 +81,12 @@
         {"id": "GF-12", "name": "Shoe cabinet", "room": "Foyer", "cat": "storage", "x": 3575, "y": 8850, "w": 400, "h": 1300, "spec": "Tall, handleless, off-white"},
         {"id": "GF-13", "name": "Fridge", "room": "Kitchen", "cat": "appliance", "x": 6925, "y": 8000, "w": 700, "h": 700, "spec": "Freestanding, 700 wide, counter-depth"},
         {"id": "GF-14", "name": "Single bed", "room": "Maid", "cat": "bed", "back": "bottom", "x": 4125, "y": 9250, "w": 900, "h": 1900, "spec": "900 x 1900 with under-bed drawers"},
-        {"id": "GF-15", "name": "Wardrobe", "room": "Maid", "cat": "storage", "x": 5325, "y": 10650, "w": 900, "h": 550, "spec": "2-door, 900 wide, 550 deep"}
+        {"id": "GF-15", "name": "Wardrobe", "room": "Maid", "cat": "storage", "x": 5325, "y": 10650, "w": 900, "h": 550, "spec": "2-door, 900 wide, 550 deep"},
+        {"id": "GF-16", "name": "Counter table", "room": "Kitchen", "cat": "table", "x": 5225, "y": 6700, "w": 1300, "h": 600, "height": 0.914, "shelf_end": "left", "size": "1300 x 600", "spec": "Marble top counter-height table with open shelf end, black frame, 130 x 60 x 91.4 cm"},
+        {"id": "GF-17", "name": "Counter stool", "room": "Kitchen", "cat": "seating", "x": 5650, "y": 6380, "w": 400, "h": 400, "height": 0.62, "spec": "Upholstered oatmeal linen seat, black legs, 40 x 40 x 62 cm"},
+        {"id": "GF-17", "name": "Counter stool", "room": "Kitchen", "cat": "seating", "x": 6100, "y": 6380, "w": 400, "h": 400, "height": 0.62, "spec": "Upholstered oatmeal linen seat, black legs, 40 x 40 x 62 cm"},
+        {"id": "GF-17", "name": "Counter stool", "room": "Kitchen", "cat": "seating", "x": 5650, "y": 7220, "w": 400, "h": 400, "height": 0.62, "spec": "Upholstered oatmeal linen seat, black legs, 40 x 40 x 62 cm"},
+        {"id": "GF-17", "name": "Counter stool", "room": "Kitchen", "cat": "seating", "x": 6100, "y": 7220, "w": 400, "h": 400, "height": 0.62, "spec": "Upholstered oatmeal linen seat, black legs, 40 x 40 x 62 cm"}
       ],
       "height": 3.0
     },

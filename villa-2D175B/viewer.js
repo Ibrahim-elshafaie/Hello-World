@@ -317,6 +317,13 @@ function buildItem(g, fl, it, col) {
     }
     return;
   }
+  if (n.includes('stool')) { // upholstered counter stool on four legs with a foot rail
+    const h = it.height || 0.62, l = inset(R, 20);
+    legs(g, l, h - 0.08, 38, M.black);
+    for (const s of ['top', 'bottom', 'left', 'right']) box(g, ...strip(inset(l, 5), s, 25), 0.2, 0.225, M.black);
+    rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, h - 0.09, h, fabric(color), 35, { collide: col });
+    return;
+  }
   if (n.includes('dining chair') || n.includes('desk chair')) {
     const dining = n.includes('dining'), s = inset(R, 40), cloth = fabric(dining ? '#b9ab96' : '#5b5f63');
     legs(g, inset(s, 20), 0.44, 25, M.black);
@@ -374,8 +381,21 @@ function buildItem(g, fl, it, col) {
     }
     return;
   }
+  if (it.cat === 'table' && it.shelf_end) { // counter-height table: marble top, shelving end panel, legs and footrest
+    const h = it.height || 0.914, marble = once('marbleSlab', () => new THREE.MeshStandardMaterial({ map: tileTex({ span: 1.3, cols: 1, rows: 1, base: '#efece6', grout: '#efece6', gw: 0, veins: 18, size: 512 }), roughness: 0.12 }));
+    const frame = mat('#26241f', { roughness: 0.55 }), end = strip(R, it.shelf_end, 300), far = OPP[it.shelf_end];
+    box(g, ...end, 0, h - 0.035, frame, { collide: col });
+    const niche = strip({ x: end[0], y: end[2], w: end[1] - end[0], h: end[3] - end[2] }, OPP[it.shelf_end], 260);
+    for (const [z0, z1] of [[0.08, 0.3], [0.34, 0.56], [0.6, 0.82]]) box(g, ...(along(it.shelf_end) ? [niche[0] + 30, niche[1] - 30, niche[2], niche[3]] : [niche[0], niche[1], niche[2] + 30, niche[3] - 30]), z0, z1, mat('#3a3833', { roughness: 0.7 }), { shadow: false });
+    const fs = strip(R, far, 70);
+    if (along(far)) { box(g, fs[0], fs[0] + 70, fs[2], fs[3], 0, h - 0.035, frame, { collide: col }); box(g, fs[1] - 70, fs[1], fs[2], fs[3], 0, h - 0.035, frame, { collide: col }); }
+    else { box(g, fs[0], fs[1], fs[2], fs[2] + 70, 0, h - 0.035, frame, { collide: col }); box(g, fs[0], fs[1], fs[3] - 70, fs[3], 0, h - 0.035, frame, { collide: col }); }
+    if (along(it.shelf_end)) box(g, cx - 25, cx + 25, R.y + 300, R.y + R.h - 300, 0.28, 0.33, frame); else box(g, R.x + 300, R.x + R.w - 300, cy - 25, cy + 25, 0.28, 0.33, frame);
+    rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, h - 0.035, h, marble, 6);
+    return;
+  }
   if (it.cat === 'table') {
-    const h = n.includes('coffee') ? 0.4 : n.includes('side') ? 0.5 : 0.75;
+    const h = it.height || (n.includes('coffee') ? 0.4 : n.includes('side') ? 0.5 : 0.75);
     const top = wood(n.includes('desk') || n.includes('dining') ? '#b88c5c' : color);
     if (it.shape === 'circle') { cyl(g, cx, cy, rad, h - 0.035, h, top, rad, 40); cyl(g, cx, cy, 28, 0, h - 0.035, M.black); cyl(g, cx, cy, rad * 0.5, 0, 0.015, M.black); }
     else if (n.includes('coffee')) { rbox(g, R.x + 70, R.x + R.w - 70, R.y + 70, R.y + R.h - 70, 0, h - 0.04, top, 10); rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, h - 0.04, h, top, 12); }
