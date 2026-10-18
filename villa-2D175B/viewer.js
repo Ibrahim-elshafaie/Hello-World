@@ -429,6 +429,11 @@ function buildItem(g, fl, it, col) {
       if (along(back)) box(g, cx - tv / 2, cx + tv / 2, s[2], s[3], tz, tz + th, M.screen);
       else box(g, s[0], s[1], cy - tv / 2, cy + tv / 2, tz, tz + th, M.screen);
     }
+    if (it.mirror) { // framed rectangular mirror standing on the top, against the wall
+      const mw = it.mirror.w, mh = it.mirror.h * MM, s = strip(R, back, 30), f = strip(R, back, 45);
+      if (along(back)) { box(g, cx - mw / 2 - 25, cx + mw / 2 + 25, f[2], f[3], z1, z1 + mh + 0.05, body); box(g, cx - mw / 2, cx + mw / 2, s[2] + (back === 'top' ? 15 : -15), s[3] + (back === 'top' ? 15 : -15), z1 + 0.025, z1 + mh + 0.025, M.mirror, { shadow: false }); }
+      else { box(g, f[0], f[1], cy - mw / 2 - 25, cy + mw / 2 + 25, z1, z1 + mh + 0.05, body); box(g, s[0] + (back === 'left' ? 15 : -15), s[1] + (back === 'left' ? 15 : -15), cy - mw / 2, cy + mw / 2, z1 + 0.025, z1 + mh + 0.025, M.mirror, { shadow: false }); }
+    }
     if (n.includes('mirror')) {
       const s = strip(R, back, 20);
       const mm = new THREE.Mesh(new THREE.CircleGeometry(0.4, 48), M.mirror);
