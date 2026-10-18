@@ -305,11 +305,24 @@ function buildItem(g, fl, it, col) {
   }
   if (n.includes('fridge')) { rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, 0, 1.85, M.steel, 15, { collide: col }); return; }
   if (n.includes('bed')) {
-    const single = n.includes('single');
-    rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, 0.06, 0.34, fabric(color), 30, { collide: col });
-    const m = inset(R, 25);
+    const single = n.includes('single'), storage = it.drawers > 0;
+    rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, storage ? 0.015 : 0.06, 0.34, fabric(color), 30, { collide: col });
+    const m = inset(R, storage ? 65 : 25);
     rbox(g, m.x, m.x + m.w, m.y, m.y + m.h, 0.34, 0.56, fabric('#f4f1ea'), 60);
-    rbox(g, ...strip(R, back, 90), 0.06, single ? 0.95 : 1.25, fabric(color), 40);
+    rbox(g, ...strip(R, back, 90), storage ? 0.015 : 0.06, it.height || (single ? 0.95 : 1.25), fabric(color), 40);
+    if (storage) { // drawer fronts along both long sides, between the headboard and the foot
+      const shade = fabric(css(rgb(color), 0.9).replace(/rgb\((\d+),(\d+),(\d+)\)/, (_, r, gg, b) => '#' + [r, gg, b].map(x => (+x).toString(16).padStart(2, '0')).join('')));
+      for (const s of SIDES_PERP[back]) {
+        const f = strip(R, s, 8), o = s === 'top' || s === 'left' ? -8 : 8;
+        const a0 = (along(back) ? R.y : R.x) + (back === 'top' || back === 'left' ? 350 : 150), a1 = (along(back) ? R.y + R.h : R.x + R.w) - (back === 'top' || back === 'left' ? 150 : 350);
+        const n = it.drawers, gap = 25, dl = (a1 - a0 - gap * (n - 1)) / n;
+        for (let i = 0; i < n; i++) {
+          const d0 = a0 + i * (dl + gap), d1 = d0 + dl;
+          if (along(back)) rbox(g, f[0] + o, f[1] + o, d0, d1, 0.05, 0.27, shade, 10);
+          else rbox(g, d0, d1, f[2] + o, f[3] + o, 0.05, 0.27, shade, 10);
+        }
+      }
+    }
     const len = along(back) ? R.h : R.w;
     rbox(g, ...strip(inset(R, 10), OPP[back], len * 0.62), 0.5, 0.61, fabric(color === '#b8ad9e' ? '#cfc6b8' : color), 45);
     const across = along(back) ? R.w : R.h, count = across > 1300 ? 2 : 1, pw = Math.min(650, across / count - 90);
