@@ -788,10 +788,13 @@ function buildStairs(g, fl, s, col) {
 // garden, terrace and boundary walls around the ground floor
 function garden(g, z) {
   floorPlane(g, -40000, 40000, -40000, 40000, floorMat('pavers'), z - 0.06);
-  floorPlane(g, ...mxs(-150, 9200), -4200, -150, M.turf, z - 0.03);
-  floorPlane(g, ...mxs(7125, 9200), -150, 9100, M.turf, z - 0.03);
+  // rear garden, side yard along the living room glazing, and a service strip by the kitchen window
+  floorPlane(g, ...mxs(-2300, 7125), -4200, -150, M.turf, z - 0.03);
+  floorPlane(g, ...mxs(-2300, -150), -150, 4850, M.turf, z - 0.03);
+  floorPlane(g, ...mxs(7775, 9200), 4850, 9100, M.turf, z - 0.03);
   floorPlane(g, ...mxs(-150, 7125), -1300, -150, floorMat('outdoor_tile'), z - 0.02);
-  const walls = [[-150, 9350, -4350, -4200], [9200, 9350, -4350, 9100], [-300, -150, -4350, -150]].map(([a, b, c, d]) => [...mxs(a, b), c, d]);
+  const walls = [[-2450, 7275, -4350, -4200], [-2450, -2300, -4200, 4850], [7125, 7275, -4200, -150],
+    [7775, 9350, 4700, 4850], [9200, 9350, 4850, 9100]].map(([a, b, c, d]) => [...mxs(a, b), c, d]);
   for (const [x0, x1, y0, y1] of walls) {
     box(g, x0, x1, y0, y1, z, z + 1.55, M.render);
     for (let k = 0; k < 4; k++) box(g, x0 + (x1 - x0 > 200 ? 0 : 20), x1 - (x1 - x0 > 200 ? 0 : 20), y0 + (y1 - y0 > 200 ? 0 : 20), y1 - (y1 - y0 > 200 ? 0 : 20), z + 1.6 + k * 0.11, z + 1.67 + k * 0.11, M.paint);
