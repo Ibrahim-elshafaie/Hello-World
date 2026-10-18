@@ -104,34 +104,34 @@
         {"name": "Balcony", "x": 5325, "y": 10100, "w": 2600, "h": 1885, "labeled": "3835 x 1885", "lx": 6625, "ly": 11700, "floor": "outdoor_tile", "rail": ["bottom"], "noceiling": true},
         {"name": "Bath 1", "x": 0, "y": 3850, "w": 2685, "h": 1650, "labeled": "2685 x 1650", "lx": 1500, "ly": 5050, "floor": "beige_tile"},
         {"name": "", "x": 2835, "y": 3850, "w": 1090, "h": 1650, "labeled": "", "floor": "marble"},
-        {"name": "Lobby", "x": 1075, "y": 5650, "w": 4100, "h": 1250, "labeled": "", "lx": 2500, "ly": 6150, "floor": "marble"},
-        {"name": "Stair", "x": 0, "y": 5650, "w": 925, "h": 5350, "labeled": "", "lx": -1, "ly": -1, "floor": "marble"},
-        {"name": "Bedroom 2", "x": 1075, "y": 7050, "w": 4100, "h": 3950, "labeled": "4100 x 3950", "lx": 3200, "ly": 8000, "floor": "carpet_grey", "ceiling": "cornice"}
+        {"name": "Lobby", "x": 1375, "y": 5650, "w": 3800, "h": 1850, "labeled": "", "lx": 2500, "ly": 6150, "floor": "marble"},
+        {"name": "Stair", "x": 0, "y": 5650, "w": 1225, "h": 5350, "labeled": "", "lx": -1, "ly": -1, "floor": "marble"},
+        {"name": "Bedroom 2", "x": 1375, "y": 7650, "w": 3800, "h": 3350, "labeled": "3800 x 3350", "lx": 3800, "ly": 9450, "floor": "carpet_grey", "ceiling": "cornice"}
       ],
       "labels": [],
       "openings": [
         {"x": 4075, "y": 3450, "w": 1100, "h": 150},
         {"x": 5175, "y": 3700, "w": 150, "h": 900},
         {"x": 2835, "y": 5500, "w": 1090, "h": 150},
-        {"x": 925, "y": 5650, "w": 150, "h": 1250}
+        {"x": 1225, "y": 5650, "w": 150, "h": 1250}
       ],
       "doors": [
         {"at": [3025, 3775], "len": 800, "wall": "h", "dir": 1, "swing": -1},
         {"at": [2760, 5350], "len": 750, "wall": "v", "dir": -1, "swing": -1},
         {"at": [4175, 5575], "len": 900, "wall": "h", "dir": 1, "swing": -1},
         {"at": [5425, 5475], "len": 700, "wall": "h", "dir": 1, "swing": 1},
-        {"at": [5250, 8400], "len": 800, "wall": "v", "dir": 1, "swing": 1},
-        {"at": [5075, 6975], "len": 800, "wall": "h", "dir": -1, "swing": 1},
+        {"at": [5250, 8350], "len": 800, "wall": "v", "dir": 1, "swing": 1},
+        {"at": [5075, 7575], "len": 800, "wall": "h", "dir": -1, "swing": 1},
         {"at": [5250, 10950], "len": 800, "wall": "v", "dir": -1, "swing": -1}
       ],
       "windows": [
         {"x1": 800, "y1": -75, "x2": 3100, "y2": -75, "sill": 0, "top": 2750},
         {"x1": 4800, "y1": -75, "x2": 7200, "y2": -75, "sill": 0, "top": 2750},
-        {"x1": 2200, "y1": 11075, "x2": 5050, "y2": 11075, "sill": 0, "top": 2750},
+        {"x1": 2475, "y1": 11075, "x2": 5175, "y2": 11075, "sill": 0, "top": 2750},
         {"x1": 100, "y1": 11075, "x2": 825, "y2": 11075, "sill": 0, "top": 2750}
       ],
       "stairs": [
-        {"x": 0, "y": 6900, "w": 925, "h": 4100, "treads": 14, "label": "DN"}
+        {"x": 0, "y": 6900, "w": 1225, "h": 4100, "treads": 14, "label": "DN"}
       ],
       "fixed": [
         {"name": "Shower", "x": 0, "y": 3850, "w": 700, "h": 1650},
@@ -161,13 +161,12 @@
         {"id": "FF-10", "name": "Lounge chair", "room": "Master bedroom", "cat": "seating", "back": "top", "x": 4600, "y": 100, "w": 800, "h": 800, "spec": "Reading chair by the window, cream"},
         {"id": "FF-11", "name": "Wardrobe", "room": "Master closet", "cat": "storage", "x": 6225, "y": 3600, "w": 1700, "h": 600, "spec": "Open hanging + drawers, oak"},
         {"id": "FF-11", "name": "Wardrobe", "room": "Master closet", "cat": "storage", "x": 7325, "y": 4200, "w": 600, "h": 1200, "spec": "Open hanging + drawers, oak"},
-        {"id": "FF-12", "name": "Console", "room": "Lobby", "cat": "storage", "x": 1800, "y": 6550, "w": 1200, "h": 350, "spec": "Slim console, art above"},
-        {"id": "FF-13", "name": "Queen bed", "room": "Bedroom 2", "cat": "bed", "back": "left", "x": 1075, "y": 8600, "w": 2000, "h": 1600, "spec": "1600 x 2000, upholstered headboard, greige"},
-        {"id": "FF-14", "name": "Nightstand", "room": "Bedroom 2", "cat": "storage", "x": 1075, "y": 8100, "w": 450, "h": 450, "spec": "Oak, 1 drawer"},
-        {"id": "FF-14", "name": "Nightstand", "room": "Bedroom 2", "cat": "storage", "x": 1075, "y": 10250, "w": 450, "h": 450, "spec": "Oak, 1 drawer"},
-        {"id": "FF-15", "name": "Cupboard", "room": "Bedroom 2", "cat": "storage", "back": "top", "x": 1075, "y": 7050, "w": 2300, "h": 400, "height": 2.4, "spec": "Built-in cupboard on the door wall, 40 cm deep, starts 90 cm from the door"},
-        {"id": "FF-16", "name": "Desk", "room": "Bedroom 2", "cat": "table", "x": 3025, "y": 10400, "w": 1200, "h": 600, "spec": "In front of the window, oak top"},
-        {"id": "FF-17", "name": "Desk chair", "room": "Bedroom 2", "cat": "seating", "back": "top", "x": 3375, "y": 9850, "w": 500, "h": 500, "spec": "Task chair, fabric"},
+        {"id": "FF-12", "name": "Console", "room": "Lobby", "cat": "storage", "x": 1800, "y": 7150, "w": 1200, "h": 350, "spec": "Slim console, art above"},
+        {"id": "FF-13", "name": "Queen bed", "room": "Bedroom 2", "cat": "bed", "back": "left", "x": 1375, "y": 8800, "w": 2000, "h": 1600, "spec": "1600 x 2000, upholstered headboard, greige"},
+        {"id": "FF-14", "name": "Nightstand", "room": "Bedroom 2", "cat": "storage", "x": 1375, "y": 10450, "w": 450, "h": 450, "spec": "Oak, 1 drawer"},
+        {"id": "FF-15", "name": "Cupboard", "room": "Bedroom 2", "cat": "storage", "back": "top", "x": 1375, "y": 7650, "w": 2000, "h": 400, "height": 2.4, "spec": "Built-in cupboard on the door wall, 200 cm long, 40 cm deep, starts 90 cm from the door"},
+        {"id": "FF-16", "name": "Desk", "room": "Bedroom 2", "cat": "table", "x": 3300, "y": 10400, "w": 1000, "h": 600, "spec": "In front of the window, oak top"},
+        {"id": "FF-17", "name": "Desk chair", "room": "Bedroom 2", "cat": "seating", "back": "top", "x": 3550, "y": 9850, "w": 500, "h": 500, "spec": "Task chair, fabric"},
         {"id": "FF-18", "name": "Armchair", "room": "Bedroom 2", "cat": "seating", "back": "right", "x": 4200, "y": 8400, "w": 800, "h": 800, "spec": "Compact reading chair"},
         {"id": "FF-19", "name": "Outdoor chair", "room": "Balcony", "cat": "seating", "back": "bottom", "x": 5700, "y": 10700, "w": 600, "h": 600, "spec": "Powder-coated aluminium, outdoor cushion"},
         {"id": "FF-19", "name": "Outdoor chair", "room": "Balcony", "cat": "seating", "back": "bottom", "x": 7000, "y": 10700, "w": 600, "h": 600, "spec": "Powder-coated aluminium, outdoor cushion"},
