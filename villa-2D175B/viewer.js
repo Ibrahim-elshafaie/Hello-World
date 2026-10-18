@@ -503,8 +503,11 @@ function buildFixed(g, fl, f, col) {
     rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, 0.83, 0.88, M.ceramic, 10);
     const s = strip(R, back, 70), tz = 0.88, pt = along(back) ? [cx, (s[2] + s[3]) / 2] : [(s[0] + s[1]) / 2, cy];
     cyl(g, pt[0], pt[1], 14, tz, tz + 0.2, M.steel);
-    const m = strip(R, back, 12), len = along(back) ? R.w : R.h;
-    const ext = Math.max(0, 900 - len) / 2;
+    const m = strip(R, back, 12), len = along(back) ? R.w : R.h, rm = roomAt(fl, cx, cy);
+    // widen the mirror to 90 cm, but keep it and its mosaic border inside the room
+    const room0 = rm ? (along(back) ? rm.x : rm.y) : -1e9, room1 = rm ? (along(back) ? rm.x + rm.w : rm.y + rm.h) : 1e9;
+    const lo = along(back) ? R.x : R.y, hi = lo + len;
+    const ext = Math.max(0, Math.min((900 - len) / 2, lo - room0 - 80, room1 - hi - 80));
     if (along(back)) {
       box(g, R.x - ext, R.x + R.w + ext, m[2], m[3], 1.05, 1.95, M.mirror, { shadow: false });
       for (const e of [R.x - ext - 70, R.x + R.w + ext]) box(g, e, e + 70, m[2], m[3] + 2, 1.05, 1.95, M.mosaic, { shadow: false });
