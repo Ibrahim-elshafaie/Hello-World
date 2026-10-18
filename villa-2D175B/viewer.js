@@ -143,7 +143,7 @@ const M = {
   tileWall: new THREE.MeshStandardMaterial({ map: tileTex({ span: 1.2, cols: 2, rows: 1, base: '#6d6e70', vary: 0.05, grout: '#58595a' }), roughness: 0.3 }),
 };
 const KEYWORDS = [['grey', '#c8c5bf'], ['beige', '#d8cab2'], ['olive', '#6f7447'], ['sand', '#cdbc9f'], ['greige', '#b8ad9e'], ['cream', '#ece3d0'],
-  ['oatmeal', '#ddd2bd'], ['off-white', '#eeeae3'], ['oak', '#c29a6b'], ['travertine', '#d8ccb4'],
+  ['oatmeal', '#ddd2bd'], ['off-white', '#eeeae3'], ['white', '#f1f1ef'], ['oak', '#c29a6b'], ['travertine', '#d8ccb4'],
   ['aluminium', '#9da3a6'], ['black', '#2a2a2a']];
 const CAT_DEFAULT = { seating: '#b9ab96', table: '#b08a5e', storage: '#c9a77c', bed: '#b8ad9e', soft: '#e6dccb', decor: '#6f8a55', appliance: '#c9cdd0' };
 function colorFor(it) {
@@ -405,6 +405,34 @@ function buildItem(g, fl, it, col) {
     else if (n.includes('coffee')) { rbox(g, R.x + 70, R.x + R.w - 70, R.y + 70, R.y + R.h - 70, 0, h - 0.04, top, 10); rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, h - 0.04, h, top, 12); }
     else { legs(g, inset(R, 40), h - 0.035, 45, M.black); rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, h - 0.035, h, top, 8); }
     hit(); return;
+  }
+  if (it.cat === 'storage' && it.vanity) { // dressing table: top, drawer over a knee space, door cabinet at one end
+    const h = it.height || 0.76, body = mat(color, { roughness: 0.35 }), V = it.vanity;
+    const hz = along(back), A0 = hz ? R.x : R.y, A1 = hz ? R.x + R.w : R.y + R.h, D0 = hz ? R.y : R.x, D1 = hz ? R.y + R.h : R.x + R.w;
+    const frontMax = back === 'top' || back === 'left';
+    const part = (a, b, d0, d1, z0, z1, m, opts) => hz ? box(g, a, b, d0, d1, z0, z1, m, opts) : box(g, d0, d1, a, b, z0, z1, m, opts);
+    const face = t => frontMax ? [D1, D1 + t] : [D0 - t, D0];
+    const back40 = frontMax ? [D0, D0 + 40] : [D1 - 40, D1];
+    const cw = V.cabinet || 330, low = V.cabinet_end !== 'high';
+    const [c0, c1] = low ? [A0, A0 + cw] : [A1 - cw, A1], [k0, k1] = low ? [A0 + cw, A1 - 18] : [A0 + 18, A1 - cw];
+    const sideP = low ? [A1 - 18, A1] : [A0, A0 + 18];
+    part(A0, A1, D0, D1, h - 0.025, h, body);
+    part(c0, c1, D0, D1, 0, h - 0.025, body);
+    part(sideP[0], sideP[1], D0, D1, 0, h - 0.025, body);
+    part(k0, k1, D0, D1, h - 0.185, h - 0.025, body);
+    part(k0, k1, ...back40, 0.02, 0.1, body);
+    col.push([R.x * MM, R.y * MM, (R.x + R.w) * MM, (R.y + R.h) * MM]);
+    const seam = face(3), hd = face(18);
+    part(k0, k1, ...seam, h - 0.19, h - 0.185, M.black, { shadow: false }); // drawer bottom edge
+    part(c0 + (low ? 0 : 6), c1 - (low ? 6 : 0), ...seam, 0.08, 0.085, M.black, { shadow: false }); // door plinth line
+    const km = (k0 + k1) / 2; part(km - 90, km + 90, ...hd, h - 0.11, h - 0.095, M.steel, { shadow: false }); // drawer pull
+    const dh = low ? c1 - 45 : c0 + 45; part(dh - 7, dh + 7, ...hd, 0.32, 0.5, M.steel, { shadow: false }); // door pull
+    if (it.mirror) { // tall framed mirror standing on the top, against the wall
+      const mw = it.mirror.w, mh = it.mirror.h * MM, am = (A0 + A1) / 2, fr = frontMax ? [D0, D0 + 22] : [D1 - 22, D1], gl = frontMax ? [D0 + 22, D0 + 26] : [D1 - 26, D1 - 22];
+      part(am - mw / 2, am + mw / 2, ...fr, h, h + mh, body);
+      part(am - mw / 2 + 30, am + mw / 2 - 30, ...gl, h + 0.03, h + mh - 0.03, M.mirror, { shadow: false });
+    }
+    return;
   }
   if (it.cat === 'storage') {
     let z0 = 0, z1 = 0.8;
