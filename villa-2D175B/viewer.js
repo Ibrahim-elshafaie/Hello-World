@@ -341,9 +341,10 @@ function buildItem(g, fl, it, col) {
     rbox(g, R.x, R.x + R.w, R.y, R.y + R.h, h - 0.09, h, fabric(color), 35, { collide: col });
     return;
   }
-  if (n.includes('dining chair') || n.includes('desk chair')) {
-    const dining = n.includes('dining'), s = inset(R, 40), cloth = fabric(dining ? '#b9ab96' : '#5b5f63');
-    legs(g, inset(s, 20), 0.44, 25, M.black);
+  if (n.includes('dining chair') || n.includes('desk chair') || n.includes('kitchen chair')) {
+    const dining = !n.includes('desk'), s = inset(R, 40), solid = (it.spec || '').toLowerCase().includes('pine');
+    const cloth = solid ? wood('#2f2a25') : fabric(dining ? '#b9ab96' : '#5b5f63');
+    legs(g, inset(s, 20), 0.44, solid ? 35 : 25, solid ? cloth : M.black);
     rbox(g, s.x, s.x + s.w, s.y, s.y + s.h, 0.43, 0.5, cloth, 25, { collide: col });
     rbox(g, ...strip(s, back, 55), 0.5, 0.92, cloth, 25);
     return;

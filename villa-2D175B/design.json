@@ -83,11 +83,11 @@
         {"id": "GF-13", "name": "Fridge", "room": "Kitchen", "cat": "appliance", "x": 6925, "y": 8000, "w": 700, "h": 700, "spec": "Freestanding, 700 wide, counter-depth"},
         {"id": "GF-14", "name": "Single bed", "room": "Maid", "cat": "bed", "back": "bottom", "x": 4125, "y": 9250, "w": 900, "h": 1900, "spec": "900 x 1900 with under-bed drawers"},
         {"id": "GF-15", "name": "Wardrobe", "room": "Maid", "cat": "storage", "x": 5325, "y": 10650, "w": 900, "h": 550, "spec": "2-door, 900 wide, 550 deep"},
-        {"id": "GF-16", "name": "Counter table", "room": "Kitchen", "cat": "table", "x": 5225, "y": 6700, "w": 1300, "h": 600, "height": 0.914, "shelf_end": "left", "size": "1300 x 600", "spec": "Marble top counter-height table with open shelf end, black frame, 130 x 60 x 91.4 cm"},
-        {"id": "GF-17", "name": "Counter stool", "room": "Kitchen", "cat": "seating", "x": 5650, "y": 6380, "w": 400, "h": 400, "height": 0.62, "spec": "Upholstered oatmeal linen seat, black legs, 40 x 40 x 62 cm"},
-        {"id": "GF-17", "name": "Counter stool", "room": "Kitchen", "cat": "seating", "x": 6100, "y": 6380, "w": 400, "h": 400, "height": 0.62, "spec": "Upholstered oatmeal linen seat, black legs, 40 x 40 x 62 cm"},
-        {"id": "GF-17", "name": "Counter stool", "room": "Kitchen", "cat": "seating", "x": 5650, "y": 7220, "w": 400, "h": 400, "height": 0.62, "spec": "Upholstered oatmeal linen seat, black legs, 40 x 40 x 62 cm"},
-        {"id": "GF-17", "name": "Counter stool", "room": "Kitchen", "cat": "seating", "x": 6100, "y": 7220, "w": 400, "h": 400, "height": 0.62, "spec": "Upholstered oatmeal linen seat, black legs, 40 x 40 x 62 cm"}
+        {"id": "GF-16", "name": "Kitchen table", "room": "Kitchen", "cat": "table", "x": 5285, "y": 6700, "w": 1180, "h": 740, "height": 0.75, "size": "1180 x 740", "spec": "IKEA H\u00c4GERN\u00c4S table, black-stained pine, 118 x 74 x 75 cm", "link": "https://www.ikea.com/ae/en/p/haegernaes-table-and-4-chairs-black-stained-pine-20575997/"},
+        {"id": "GF-17", "name": "Kitchen chair", "room": "Kitchen", "cat": "seating", "back": "top", "x": 5370, "y": 6330, "w": 420, "h": 470, "spec": "IKEA H\u00c4GERN\u00c4S chair, black-stained pine, seat 40 x 41 cm, height 87 cm"},
+        {"id": "GF-17", "name": "Kitchen chair", "room": "Kitchen", "cat": "seating", "back": "top", "x": 5960, "y": 6330, "w": 420, "h": 470, "spec": "IKEA H\u00c4GERN\u00c4S chair, black-stained pine, seat 40 x 41 cm, height 87 cm"},
+        {"id": "GF-17", "name": "Kitchen chair", "room": "Kitchen", "cat": "seating", "back": "bottom", "x": 5370, "y": 7340, "w": 420, "h": 470, "spec": "IKEA H\u00c4GERN\u00c4S chair, black-stained pine, seat 40 x 41 cm, height 87 cm"},
+        {"id": "GF-17", "name": "Kitchen chair", "room": "Kitchen", "cat": "seating", "back": "bottom", "x": 5960, "y": 7340, "w": 420, "h": 470, "spec": "IKEA H\u00c4GERN\u00c4S chair, black-stained pine, seat 40 x 41 cm, height 87 cm"}
       ],
       "height": 3.0
     },
